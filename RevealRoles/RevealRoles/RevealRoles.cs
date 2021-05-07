@@ -54,7 +54,10 @@ namespace RevealRoles
                     }
                     p.role += rol.name;
                 }
-                _instance.players.Add(p);
+                if(p.role != "CrewMate")
+                {
+                    _instance.players.Add(p);
+                }
                 _instance.msgFlag = true;
             }
         }

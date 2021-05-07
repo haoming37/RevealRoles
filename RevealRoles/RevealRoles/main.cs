@@ -10,7 +10,7 @@ using Logger = BepInEx.Logging.Logger;
 
 namespace RevealRoles
 {
-    [BepInPlugin(Id)]
+    [BepInPlugin(Id, "Reveal Roles", "1.0.1")]
     [BepInProcess("Among Us.exe")]
     [BepInDependency("me.eisbison.theotherroles")]
     public class TemplatePlugin : BasePlugin
