@@ -6,7 +6,13 @@ namespace RevealRoles {
     public static class ShipStatusStartPatch{
         public static void Prefix(){
             RR.LogInfo("ShipStatusStartPatch");
-            RR.SetPlayers();
+            if (AmongUsClient.Instance?.AmHost == true && PlayerControl.LocalPlayer) {
+                RR.SetPlayersDelay();
+            }
+            else
+            {
+                RR.SetPlayers();
+            }
             return;
         }
 

@@ -30,6 +30,7 @@ namespace RevealRoles
         public bool msgFlag = false;
         public bool waitFlag = false;
         Timer timer;
+        Timer timerSPD;
         public List<Player> players = new List<Player>();
         private static RR _instance = new RR();
         public static RR GetInstance() { return _instance;}
@@ -61,6 +62,18 @@ namespace RevealRoles
                 _instance.msgFlag = true;
             }
         }
+
+        public static void SetPlayersDelay(){
+            LogInfo("SetPlayersDelay");
+            TimerCallback timerDelegate = new TimerCallback(OnTimerSPD);
+            _instance.timerSPD = new Timer(timerDelegate, null , 3000, 5000);
+        }
+        private static void OnTimerSPD(object o){
+            LogInfo("OnTimerSPD");
+            _instance.timerSPD.Dispose();
+            SetPlayers();
+        }
+
         private static void OnTimer(object o){
             LogInfo("OnTimer");
             _instance.waitFlag = true;
@@ -77,7 +90,7 @@ namespace RevealRoles
                     {
                         LogInfo("SetTimer");
                         TimerCallback timerDelegate = new TimerCallback(OnTimer);
-                        _instance.timer = new Timer(timerDelegate, null , 3000, 3000);
+                        _instance.timer = new Timer(timerDelegate, null , 3000, 5000);
                     }
                     if(_instance.waitFlag){
                         LogInfo("SendMessage");
